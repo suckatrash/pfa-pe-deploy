@@ -15,4 +15,4 @@ ech/pfa-pe-deploy:
   Exec:
     - sudo /opt/puppetlabs/bin/puppet resource service pe-puppetserver ensure=running
   PostStart:
-    - /opt/puppetlabs/bin/puppet infra status
+    - /opt/puppetlabs/bin/puppet infrastructure status
