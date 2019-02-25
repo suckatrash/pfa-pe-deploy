@@ -1,0 +1,18 @@
+---
+ech/pfa-pe-deploy:
+
+  Build:
+    - curl -JLO https://pm.puppet.com/cgi-bin/download.cgi\?dist\=el\&rel\=7\&arch\=x86_64\&ver\=latest
+  PkgInclude:
+    - '*'
+  PostInstall:
+    - echo "unpacking"
+    - tar --strip-components=1 -xvf puppet-enterprise*tar.gz
+    - echo "installing PE"
+    - sudo ./puppet-enterprise-installer -c pe.conf -y
+    - echo "stopping puppetserver"
+    - sudo /opt/puppetlabs/bin/puppet resource service pe-puppetserver ensure=stopped
+  Exec:
+    - sudo /opt/puppetlabs/bin/puppet resource service pe-puppetserver ensure=running
+  PostStart:
+    - /opt/puppetlabs/bin/puppet infra status
