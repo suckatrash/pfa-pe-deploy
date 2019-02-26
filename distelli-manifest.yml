@@ -12,6 +12,7 @@ ech/pfa-pe-deploy:
     - sudo ./puppet-enterprise-installer -c pe.conf -y
     - echo "stopping puppetserver"
     - sudo /opt/puppetlabs/bin/puppet resource service pe-puppetserver ensure=stopped
+    - echo "test"
   Exec:
     - sudo /opt/puppetlabs/bin/puppet resource service pe-puppetserver ensure=running
   PostStart:
